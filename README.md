@@ -1,34 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Doodle Challenge
 
-## Getting Started
+> Dražen Buljovčić
 
-First, run the development server:
+This is a coding assesment challenge sent to me to implement a small app based on the [assignment](https://github.com/DoodleScheduling/hiring-challenges/tree/master/frontend-engineer).
 
-```bash
-npm run dev
-# or
-yarn dev
+### App
+
+This is a [Next.js app](https://nextjs.org/docs/getting-started) that utilizes SSR to present all components to the user immediately on page load.
+
+![ssr-preview](public/ssr-preview.png)
+
+> SSR can be previewed directly on the Vercel dashboard.
+
+The app is deployed and is accessible [here](https://doodle-challenge-drazenbuljovcic.vercel.app/chat)!
+
+### Workflow
+
+#### Development
+
+Please check [package.json](package.json) for all available scripts to manage the application development.
+
+Run in your terminal and the app will open by default on [http://localhost:3000](http://localhost:3000).
+
+_Change port number if the default one already has a process running_
+
+```
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The whole app code is written with `Typescript`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+`Testing`
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project supports testing with Jest.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`TODOs`
 
-## Learn More
+For testing component behaviour we would introduce `React-Testing-Library`.
+For testing e2e behaviour of the app we could add a tool like `Cypress`.
 
-To learn more about Next.js, take a look at the following resources:
+```
+$ yarn test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`Linting`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+$ yarn lint
+```
 
-## Deploy on Vercel
+`Prettier`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+$ yarn prettier
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Review
+
+On opening each feature PR there is an automatic link set up with preview deployments.
+
+Check [example PR](https://github.com/drazenbuljovcic/doodle-challenge/pull/1) to find a link to the preview and open the app with the current changes applied before being merged to prod.
+
+`TODO CI/CD`
+
+#### Deployment
+
+Run the build script to generate the artifacts in the state ready for deployment to either test environments or to production.
+
+```
+$ yarn build
+```
+
+`PRODUCTION`
+
+On push to the `main` branch - or merging the PR into `main` we will get an automatic production deployment.
+
+### Next steps for this application
+
+As we are using Next.js v13 we would be able to convert this application to utilize the `app` [directory](https://nextjs.org/blog/layouts-rfc).
