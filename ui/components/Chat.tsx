@@ -1,11 +1,34 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useCallback, useState } from 'react';
+import { fetchMessages, sendMessage } from 'services/chat';
 import ChatMessage from './ChatMessage';
+import MessageInput from './MessageInput';
 
 const Chat: FC<{
   inputMessages: Message[];
 }> = ({ inputMessages }) => {
-  console.log({ inputMessages });
   const [messages, setMessages] = useState(inputMessages);
+
+  const reloadChatMessages = useCallback(async () => {
+    try {
+      setMessages(await fetchMessages());
+    } catch {
+      // TODO display error to the user
+    }
+  }, []);
+
+  const handleNewMessage = useCallback(
+    async (chatMessage: string) => {
+      const message = { message: chatMessage, author: 'me' };
+      try {
+        await sendMessage(message);
+      } catch {
+        // TODO display error to the user
+      }
+
+      reloadChatMessages();
+    },
+    [reloadChatMessages],
+  );
 
   return (
     <main className="h-full bg-blue-200 bg-[url('/body-bg.png')]">
@@ -26,6 +49,8 @@ const Chat: FC<{
             </Fragment>
           )}
         </section>
+
+        <MessageInput onNewMessage={handleNewMessage} />
       </div>
     </main>
   );
