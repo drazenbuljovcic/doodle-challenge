@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
+import ChatMessage from './ChatMessage';
 
 const Chat: FC<{
   inputMessages: Message[];
@@ -15,8 +16,14 @@ const Chat: FC<{
               <p>Start Chatting!!!</p>
             </div>
           ) : (
-            // TODO implmement chat message elements
-            <pre>{JSON.stringify(messages, null, 2)}</pre>
+            <Fragment>
+              {messages.map((message, index) => (
+                <ChatMessage
+                  key={Math.floor(Math.random() * 100000)}
+                  message={message}
+                />
+              ))}
+            </Fragment>
           )}
         </section>
       </div>
